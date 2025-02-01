@@ -4,8 +4,10 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+url = 'https://raw.githubusercontent.com/Harshada13/Data-Driven-Classification-of-Used-Cars-in-Auction/refs/heads/main/training.csv'
+
 # 1. Reading the training data CSV and storing it into a dataframe
-df = pd.read_csv("training.csv")
+df = pd.read_csv(url)
 
 # 2. Display structure and summary
 print(df.info())
