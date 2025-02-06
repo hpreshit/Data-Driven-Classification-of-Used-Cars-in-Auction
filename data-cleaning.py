@@ -52,14 +52,8 @@ num_vars = ['VehicleAge', 'VehOdo', 'MMRAcquisitionAuctionAveragePrice', 'MMRAcq
 df[num_vars] = df[num_vars].apply(pd.to_numeric, errors='coerce')
 
 # 11. Handling missing numeric data by imputing with the mean
-df['MMRAcquisitionAuctionAveragePrice'].fillna(df['MMRAcquisitionAuctionAveragePrice'].mean(), inplace=True)
-df['MMRAcquisitionAuctionCleanPrice'].fillna(df['MMRAcquisitionAuctionCleanPrice'].mean(), inplace=True)
-df['MMRAcquisitionRetailAveragePrice'].fillna(df['MMRAcquisitionRetailAveragePrice'].mean(), inplace=True)
-df['MMRAcquisitonRetailCleanPrice'].fillna(df['MMRAcquisitonRetailCleanPrice'].mean(), inplace=True)
-df['MMRCurrentAuctionAveragePrice'].fillna(df['MMRCurrentAuctionAveragePrice'].mean(), inplace=True)
-df['MMRCurrentAuctionCleanPrice'].fillna(df['MMRCurrentAuctionCleanPrice'].mean(), inplace=True)
-df['MMRCurrentRetailAveragePrice'].fillna(df['MMRCurrentRetailAveragePrice'].mean(), inplace=True)
-df['MMRCurrentRetailCleanPrice'].fillna(df['MMRCurrentRetailCleanPrice'].mean(), inplace=True)
+for col in num_vars:
+    df[col].fillna(df[col].mean(), inplace=True)
 
 # 12. Winsorizing outliers for numeric variables (using z-scores)
 def winsorize_outliers(df, column):
