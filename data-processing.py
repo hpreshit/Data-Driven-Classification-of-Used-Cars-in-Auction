@@ -44,7 +44,7 @@ car_data = pd.get_dummies(car_data, drop_first=True)
 train_data, test_data = train_test_split(car_data, test_size=0.15, random_state=9, stratify=car_data[target_col])
 
 # Saving test data before scaling
-test_data.to_csv("Test_Without_Scaling.csv", index=False)
+test_data.to_csv("test_without_scaling.csv", index=False)
 
 # SMOTE: Balancing the dataset
 X_train = train_data.drop(columns=[target_col])
@@ -59,8 +59,12 @@ test_data[X_train.columns] = scaler.transform(test_data[X_train.columns])
 
 # Saving the processed train and test datasets
 train_balanced = pd.concat([X_train_balanced, y_train_balanced.reset_index(drop=True)], axis=1)
-train_balanced.to_csv("Balanced_Train.csv", index=False)
-test_data.to_csv("Balanced_Test.csv", index=False)
+train_balanced.to_csv("balanced_train.csv", index=False)
+test_data.to_csv("balanced_test.csv", index=False)
+
+# Save as pickle (similar to RDS)
+pd.to_pickle(train_balanced, 'balanced_train.pkl')
+pd.to_pickle(test_data, 'balanced_test.pkl')
 
 # Principal Component Analysis
 pca = PCA(n_components=0.95)  # Adjusted to 95% variance explained
@@ -73,6 +77,8 @@ pca_df.iloc[:, :-1] = (pca_df.iloc[:, :-1] - pca_df.iloc[:, :-1].min()) / (pca_d
 
 # Saving PCA dataset
 pca_df.to_csv("car_pca_df.csv", index=False)
+# Save as pickle (similar to RDS)
+pd.to_pickle(pca_df, 'car_pca_df.pkl')
 
 # Binning numerical variables for Association Rule Mining (ARM)
 numerical_cols = X_train.columns
@@ -94,6 +100,6 @@ for col in numerical_cols:
 
 # Saving ARM dataset
 car_data.to_csv("rules_df.csv", index=False)
-
+pd.to_pickle(car_data, 'rules_df.pkl')
 
 print("Data processing complete!")
