@@ -79,5 +79,6 @@ print(df.isna().sum())
 
 # Save the cleaned dataframe to a new CSV file
 df.to_csv("cleaned_training.csv", index=False)
+df.to_pickle("cleaned_training.pkl")
 
 print("Cleaned data saved to 'cleaned_training.csv'.")

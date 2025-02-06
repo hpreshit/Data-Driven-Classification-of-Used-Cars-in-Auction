@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the CSV data into pandas DataFrame
-df = pd.read_csv('rules_df.csv')
+df = pd.read_pickle('rules_df.pkl')
 
 # Convert the data into a one-hot encoded matrix
 # Assuming the dataset contains transaction-like data
